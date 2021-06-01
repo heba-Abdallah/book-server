@@ -6,6 +6,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 
 const server = express();
+server.use(express.json());
 server.use(cors());
 
 const PORT = process.env.PORT;
@@ -100,6 +101,8 @@ function userCollectionSeed() {
 }
 // userCollectionSeed()
 server.get('/books', bookhandler);
+server.post('/addBooks', addBooksHandler);
+server.delete('/deleteBook/:index', deleteBooksHandler);
 
 function bookhandler(req, res) {
     let userEmail = req.query.email
@@ -117,6 +120,41 @@ function bookhandler(req, res) {
 
 }
 
+function addBooksHandler(req, res) {
+    console.log(req.body);
+    const { name, description, image_url, email } = req.body;
+    console.log(name);
+
+    myUserBooks.find({ email: email }, (err, userData) => {
+        if (err) {
+            res.send('did not work')
+        } else {
+            userData[0].books.push({
+                name: name,
+                description: description,
+                image_url: image_url
+            })
+            userData[0].save();
+            res.send(userData[0].books)
+        }
+    })
+}
+
+function deleteBooksHandler(req, res) {
+    const { email } = req.query;
+    const index = Number(req.params.index)
+
+    myUserBooks.find({ email: email }, (error, userData) =>{
+        const newBookArr = userData[0].books.filter((book,idx)=>{
+            if(idx !== index){
+                return book;
+            }
+        })
+        userData[0].books=newBookArr;
+        userData[0].save();
+        res.send(userData[0].books);
+    })
+}
 
 server.listen(PORT, () => {
     console.log(`Listening on PORT ${PORT}`)
