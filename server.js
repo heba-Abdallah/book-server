@@ -38,15 +38,15 @@ const myUserBooks = mongoose.model('user', userSchema)
 
 
 function bookCollectionSeed() {
-    const funHome = new myBookLibrary({
-        name: 'The Siege',
-        description: 'The Levin family battle against starvation in this novel set during the German siege of Leningrad. Anna digs tank traps and dodges patrols as she scavenges for wood, but the hand of history is hard to escape.',
-        image_url: 'https://i.guim.co.uk/img/media/19e81774d363b8047502e64d172ee357973c83bc/0_0_326_499/master/326.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=cb831a760f081fb13b67c13c2d42bf54'
+    const theTimeOfTheWhiteHorses = new myBookLibrary({
+        name: 'The time of the white horses',
+        description: 'The main charachter is a young man in a small palestinian town in the late 19th century. The author relates through the life of his hero, the life of the whole village, its culture, customs, geography,.. and mainly an important step in the palestinian issue evolution : The displacement of native palestinians from their homes!',
+        image_url: 'https://upload.wikimedia.org/wikipedia/ar/thumb/0/03/Time-of-White-Horses-2007.jpg/211px-Time-of-White-Horses-2007.jpg'
     })
-    const siege = new myBookLibrary({
-        name: 'Outline by Rachel',
-        description: 'This startling work of autofiction, which signalled a new direction for Cusk, follows an author teaching a creative writing course over one hot summer in Athens. She leads storytelling exercises. She meets other writers for dinner. She hears from other people about relationships, ambition, solitude, intimacy and “the disgust that exists indelibly between men and women”. The end result is sublime.',
-        image_url: 'https://i.guim.co.uk/img/media/aa7c2ad78f185e2d373c352aaa530eec712c807a/0_0_326_499/master/326.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=d512e953d5a554d6f17661be24012c49'
+    const Tantouriah = new myBookLibrary({
+        name: 'Al Tantouriah',
+        description: 'The Woman from Tantoura: A Novel of Palestine. Palestine for most of us, the word brings to mind a series of confused images and disjointed associations-massacres, refugee camps, UN resolutions, settlements, terrorist attacks, war, occupation, checkered kouffiyehs and suicide bombers, a seemingly endless cycle of death and destruction.',
+        image_url: 'https://upload.wikimedia.org/wikipedia/ar/9/92/%D8%A7%D9%84%D8%B7%D9%86%D8%B7%D9%88%D8%B1%D9%8A%D8%A9.jpg'
     })
     const outLine = new myBookLibrary({
         name: 'Fun Home',
@@ -56,10 +56,10 @@ function bookCollectionSeed() {
 
 
     outLine.save();
-    funHome.save();
-    siege.save();
+    theTimeOfTheWhiteHorses.save();
+    Tantouriah.save();
 }
-//bookCollectionSeed()
+// bookCollectionSeed()
 function userCollectionSeed() {
     const heba = new myUserBooks({
         email: 'ha2205713@gmail.com',
