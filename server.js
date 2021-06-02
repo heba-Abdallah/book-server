@@ -99,7 +99,7 @@ function userCollectionSeed() {
     heba.save();
     fatima.save();
 }
-// userCollectionSeed()
+userCollectionSeed()
 server.get('/books', bookhandler);
 server.post('/addBooks', addBooksHandler);
 server.delete('/deleteBook/:index', deleteBooksHandler);
