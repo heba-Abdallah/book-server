@@ -59,7 +59,7 @@ function bookCollectionSeed() {
     theTimeOfTheWhiteHorses.save();
     Tantouriah.save();
 }
-bookCollectionSeed()
+// bookCollectionSeed()
 function userCollectionSeed() {
     const heba = new myUserBooks({
         email: 'ha2205713@gmail.com',
