@@ -15,7 +15,7 @@ server.get('/', (req, res) => {
     res.send('hello');
 })
 
-mongoose.connect('mongodb://localhost:27017/books',
+mongoose.connect(`${process.env.MONGODB_URI}`,
     { useNewUrlParser: true, useUnifiedTopology: true });
 
 
@@ -99,7 +99,7 @@ function userCollectionSeed() {
     heba.save();
     fatima.save();
 }
-// userCollectionSeed()
+userCollectionSeed()
 server.get('/books', bookhandler);
 server.post('/addBooks', addBooksHandler);
 server.delete('/deleteBook/:index', deleteBooksHandler);
