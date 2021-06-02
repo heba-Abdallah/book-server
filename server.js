@@ -103,6 +103,7 @@ function userCollectionSeed() {
 server.get('/books', bookhandler);
 server.post('/addBooks', addBooksHandler);
 server.delete('/deleteBook/:index', deleteBooksHandler);
+server.put('/updateBook/:index', updateBookhandler)
 
 function bookhandler(req, res) {
     let userEmail = req.query.email
@@ -112,8 +113,8 @@ function bookhandler(req, res) {
             console.log('did not work')
         } else {
 
-            console.log(userData[0])
-            console.log(userData[0].books)
+            // console.log(userData[0])
+            // console.log(userData[0].books)
             res.send(userData[0].books)
         }
     })
@@ -121,7 +122,7 @@ function bookhandler(req, res) {
 }
 
 function addBooksHandler(req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     const { name, description, image_url, email } = req.body;
     console.log(name);
 
@@ -144,16 +145,35 @@ function deleteBooksHandler(req, res) {
     const { email } = req.query;
     const index = Number(req.params.index)
 
-    myUserBooks.find({ email: email }, (error, userData) =>{
-        const newBookArr = userData[0].books.filter((book,idx)=>{
-            if(idx !== index){
+    myUserBooks.find({ email: email }, (error, userData) => {
+        const newBookArr = userData[0].books.filter((book, idx) => {
+            if (idx !== index) {
                 return book;
             }
         })
-        userData[0].books=newBookArr;
+        userData[0].books = newBookArr;
         userData[0].save();
         res.send(userData[0].books);
     })
+}
+
+function updateBookhandler(req, res) {
+    console.log(req.body);
+    console.log(req.params.index);
+    const { name, description, image_url, email } = req.body;
+    const index = Number(req.params.index);
+
+    myUserBooks.find({ email: email }, (error, userData) => {
+        userData[0].books.splice(index, 1, {
+            name: name,
+            description: description,
+            image_url: image_url
+        })
+        userData[0].save();
+        // console.log('h', userData[0]);
+        res.send(userData[0].books)
+    })
+
 }
 
 server.listen(PORT, () => {
